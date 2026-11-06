@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contáctanos | Hotel Buena Vista</title>
+    <link rel="stylesheet" href="Css/css.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>Hotel <span>Buena Vista</span></h1>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="Home.html" class="nav-link">Inicio</a></li>
+                    <li><a href="Habitaciones.html" class="nav-link">Ver Habitaciones</a></li>
+                    <li><a href="Contacto.html" class="nav-link-active">Contáctanos</a></li>
+                    <li><a href="Reserva.html" class="nav-link">Reserva ya</a></li>
+                    <li><a href="LOGIN.html" class="btn-login-nav">Registrarse</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="menu-section">
+        <div class="section-title">
+            <h2>Contáctanos</h2>
+            <p>¿Tienes dudas sobre tu estadía? Escríbenos y te responderemos lo antes posible.</p>
+        </div>
+    </main>
+
+    <section class="contacto-layout">
+
+        <!-- Datos del hotel (reemplaza con los datos reales) -->
+        <aside class="contacto-info">
+            <h3>Información del hotel</h3>
+
+            <div class="contacto-dato">
+                <h4>Dirección</h4>
+                <p>Faldas del volcán de Santa Ana, El Salvador</p>
+            </div>
+
+            <div class="contacto-dato">
+                <h4>Teléfono</h4>
+                <p><a href="tel:+50300000000">+503 0000 0000</a></p>
+            </div>
+
+            <div class="contacto-dato">
+                <h4>Correo</h4>
+                <p><a href="mailto:info@hotelbuenavista.com">info@hotelbuenavista.com</a></p>
+            </div>
+
+            <div class="contacto-dato">
+                <h4>Horario de atención</h4>
+                <p>Todos los días, de 7:00 a.m. a 9:00 p.m.</p>
+            </div>
+        </aside>
+
+        <!-- Formulario -->
+        <form class="Formulario" id="form-contacto" novalidate>
+            <div class="campo">
+                <label for="c-nombre">Nombre completo</label>
+                <input type="text" id="c-nombre" name="nombre" placeholder="Escribe tu nombre aquí" required>
+            </div>
+
+            <div class="campo">
+                <label for="c-correo">Correo electrónico</label>
+                <input type="email" id="c-correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+            </div>
+
+            <div class="campo">
+                <label for="c-asunto">Motivo de tu mensaje</label>
+                <select id="c-asunto" name="asunto" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    <option value="reserva">Consulta sobre una reserva</option>
+                    <option value="habitaciones">Información de habitaciones</option>
+                    <option value="sugerencia">Sugerencia o comentario</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="c-mensaje">Mensaje</label>
+                <textarea id="c-mensaje" name="mensaje" placeholder="Cuéntanos en qué podemos ayudarte" required></textarea>
+            </div>
+
+            <p class="mensaje-form" id="msg-contacto" role="status"></p>
+
+            <button type="submit" class="boton">Enviar mensaje</button>
+        </form>
+    </section>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Hotel Buena Vista. Diseñado con fines totalmente educativos</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('form-contacto');
+        const msg = document.getElementById('msg-contacto');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            msg.className = 'mensaje-form visible';
+
+            if (!form.checkValidity()) {
+                msg.classList.add('error');
+                msg.textContent = 'Completa todos los campos con datos válidos para enviar el mensaje.';
+                return;
+            }
+
+            // Aquí se conectaría con un servidor; por ahora solo se confirma en pantalla.
+            msg.classList.add('ok');
+            msg.textContent = 'Mensaje enviado. Te responderemos pronto.';
+            form.reset();
+        });
+    </script>
+</body>
+</html>

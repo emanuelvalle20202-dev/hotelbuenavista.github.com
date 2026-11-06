@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reserva | Hotel Buena Vista</title>
+    <link rel="stylesheet" href="Css/css.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>Hotel <span>Buena Vista</span></h1>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="Home.html" class="nav-link">Inicio</a></li>
+                    <li><a href="Habitaciones.html" class="nav-link">Ver Habitaciones</a></li>
+                    <li><a href="Contacto.html" class="nav-link">Contactanos</a></li>
+                    <li><a href="Reserva.html" class="nav-link-active">Reserva ya</a></li>
+                    <li><a href="LOGIN.html" class="btn-login-nav">Registrarse</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="menu-section">
+        <div class="section-title">
+            <h2>Reservaciones</h2>
+            <p>Elige la aventura que desees y acomódate en nuestras propuestas.</p>
+        </div>
+    </main>
+
+    <div class="reserva-layout">
+
+        <!-- Formulario (izquierda) -->
+        <form class="Formulario" id="form-reserva" novalidate>
+            <div class="campo">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre aquí" required>
+            </div>
+
+            <div class="campo">
+                <label for="Apellidos">Apellido:</label>
+                <input type="text" id="Apellidos" name="Apellido" placeholder="Escribe tus apellidos aquí" required>
+            </div>
+
+            <div class="campo">
+                <label for="Habitacion">Elige una habitación:</label>
+                <select id="Habitacion" name="Habitacion" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    <option value="hnormal">Habitación Normal</option>
+                    <option value="Scntinetal">Suite Continental</option>
+                    <option value="Cpriv">Cabaña Privada</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="Fechaingreso">Fecha de ingreso:</label>
+                <input type="date" id="Fechaingreso" name="FechaIngreso" required>
+            </div>
+
+            <div class="campo">
+                <label for="Fechasalida">Fecha de salida:</label>
+                <input type="date" id="Fechasalida" name="FechaSalida" required>
+            </div>
+
+            <div class="campo">
+                <label for="NumeroHuespedes">Numero de Huespedes</label>
+                <input type="number" id="NumeroHuespedes" min="1" max="10" value="1" required>
+            </div>
+
+            <div class="campo">
+                <label for="Hora">Hora de entrada:</label>
+                <input type="time" id="Hora" name="Hora" required>
+            </div>
+
+            <p class="mensaje-form" id="msg-reserva" role="status"></p>
+
+            <button type="submit" class="boton">Reservar ya</button>
+        </form>
+
+        <!-- Carrusel (derecha) -->
+        <section class="carrusel" aria-roledescription="carrusel" aria-label="Imágenes del hotel">
+            <div class="carrusel-pista" id="pista">
+                <figure class="carrusel-slide">
+                    <img src="Habitacionnormal.avif" alt="Habitación normal del hotel">
+                    <figcaption class="carrusel-texto">
+                        <h3>Habitación Normal</h3>
+                        <p>Comodidad, WiFi y cable satelital.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="carrusel-slide">
+                    <img src="habitacion-jr-suite-8.jpg" alt="Suite Continental con vista impresionante">
+                    <figcaption class="carrusel-texto">
+                        <h3>Suite Continental</h3>
+                        <p>Privacidad total y cancha de tenis en la azotea.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="carrusel-slide">
+                    <img src="Cabaña.jpg" alt="Cabaña privada rodeada de naturaleza">
+                    <figcaption class="carrusel-texto">
+                        <h3>Cabaña Privada</h3>
+                        <p>Jacuzzi personal, lejos del ritmo de la ciudad.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="carrusel-slide">
+                    <img src="Patio.webp" alt="Zonas de recreación familiar del hotel">
+                    <figcaption class="carrusel-texto">
+                        <h3>Zonas de recreación</h3>
+                        <p>Espacios ideales para disfrutar en familia.</p>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <button type="button" class="carrusel-btn prev" id="prev" aria-label="Imagen anterior">&#8249;</button>
+            <button type="button" class="carrusel-btn next" id="next" aria-label="Imagen siguiente">&#8250;</button>
+            <div class="carrusel-puntos" id="puntos"></div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Hotel Buena Vista. Diseñado con fines totalmente educativos</p>
+    </footer>
+
+    <script>
+        /* ---------- Carrusel ---------- */
+        const pista = document.getElementById('pista');
+        const slides = pista.children;
+        const contPuntos = document.getElementById('puntos');
+        const carrusel = document.querySelector('.carrusel');
+        let actual = 0;
+        let timer = null;
+
+        for (let i = 0; i < slides.length; i++) {
+            const p = document.createElement('button');
+            p.type = 'button';
+            p.className = 'carrusel-punto';
+            p.setAttribute('aria-label', 'Ir a la imagen ' + (i + 1));
+            p.addEventListener('click', () => { mostrar(i); reiniciar(); });
+            contPuntos.appendChild(p);
+        }
+
+        function mostrar(i) {
+            actual = (i + slides.length) % slides.length;
+            pista.style.transform = 'translateX(-' + (actual * 100) + '%)';
+            [...contPuntos.children].forEach((p, n) =>
+                p.setAttribute('aria-current', n === actual));
+        }
+
+        function iniciar() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            timer = setInterval(() => mostrar(actual + 1), 5000);
+        }
+        function detener() { clearInterval(timer); }
+        function reiniciar() { detener(); iniciar(); }
+
+        document.getElementById('prev').addEventListener('click', () => { mostrar(actual - 1); reiniciar(); });
+        document.getElementById('next').addEventListener('click', () => { mostrar(actual + 1); reiniciar(); });
+        carrusel.addEventListener('mouseenter', detener);
+        carrusel.addEventListener('mouseleave', iniciar);
+        carrusel.addEventListener('focusin', detener);
+        carrusel.addEventListener('focusout', iniciar);
+
+        mostrar(0);
+        iniciar();
+
+        /* ---------- Formulario ---------- */
+        const form = document.getElementById('form-reserva');
+        const msg = document.getElementById('msg-reserva');
+        const ingreso = document.getElementById('Fechaingreso');
+        const salida = document.getElementById('Fechasalida');
+
+        // No permitir fechas pasadas
+        const hoy = new Date();
+        hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
+        const hoyTxt = hoy.toISOString().split('T')[0];
+        ingreso.min = hoyTxt;
+        salida.min = hoyTxt;
+        ingreso.addEventListener('change', () => { salida.min = ingreso.value || hoyTxt; });
+
+        function mostrarMensaje(tipo, texto) {
+            msg.className = 'mensaje-form visible ' + tipo;
+            msg.textContent = texto;
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            if (!form.checkValidity()) {
+                mostrarMensaje('error', 'Completa todos los campos con datos válidos para reservar.');
+                return;
+            }
+            if (salida.value <= ingreso.value) {
+                mostrarMensaje('error', 'La fecha de salida debe ser posterior a la fecha de ingreso.');
+                return;
+            }
+
+            // Aquí se enviaría la reserva a un servidor; por ahora solo se confirma en pantalla.
+            mostrarMensaje('ok', 'Reserva registrada. ¡Te esperamos en Hotel Buena Vista!');
+            form.reset();
+        });
+    </script>
+</body>
+</html>

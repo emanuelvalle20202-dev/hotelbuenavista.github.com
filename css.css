@@ -1,0 +1,678 @@
+:root {
+    --primary-color: #2f70e1;
+    --primary-hover: #1446ce;
+    --dark-color: #2c3e50;
+    --ligh-color: #f8f9fa;
+    --white: #ffffff;
+    --gray: #9ecdff;
+    --border-color: #dcdde1;
+    --error-color: #c0392b;
+    --success-color: #1e8449;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--dark-color);
+    background-color: var(--ligh-color);
+    line-height: 1.6;
+}
+
+/* ---------- Encabezado y navegación ---------- */
+.main-header {
+    background-color: var(--gray);
+    box-shadow: var(--shadow-subtle);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    padding: 1rem;
+}
+
+.logo h1 {
+    font-size: 2.1rem;
+    color: var(--dark-color);
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.nav-link,
+.nav-link-active {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.nav-link-active {
+    color: var(--primary-hover);
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: var(--primary-hover);
+}
+
+/* Subrayado animado (ahora también aparece en la página activa) */
+.nav-link::after,
+.nav-link-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-hover);
+    transition: var(--transition-smooth);
+}
+
+.nav-link:hover::after,
+.nav-link-active::after {
+    width: 100%;
+}
+
+.btn-login-nav {
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.btn-login-nav:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* Foco visible para quien navega con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary-hover);
+    outline-offset: 2px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('https://tfp.tui.mybluehost.me/wp-content/uploads/2024/08/image-336.jpeg') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: var(--white);
+    padding: 0 1rem;
+}
+
+.hero-content {
+    background: transparent;
+    color: #ffffff;
+}
+
+.hero h2,
+.hero p,
+.hero a {
+    background: none;
+    color: #ffffff;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 5px 15px rgba(92, 190, 255, 0.4);
+    letter-spacing: 0.5px;
+}
+
+/* ---------- Secciones y tarjetas ---------- */
+.menu-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 2.2rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background-color: var(--primary-color);
+    bottom: 0;
+}
+
+.menu-grid {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.menu-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-subtle);
+    transition: var(--transition-smooth);
+}
+
+.menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-img-container {
+    overflow: hidden;
+    height: 220px;
+}
+
+.card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.menu-card:hover .card-img-container img {
+    transform: scale(1.08);
+}
+
+.card-info {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.7rem;
+}
+
+.card-info p {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+}
+
+.card-list-tittle {
+    font-size: 1.05rem !important;
+    color: var(--primary-hover);
+}
+
+.list {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    padding-left: 1.25rem;
+}
+
+.card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.btn-card {
+    text-decoration: none;
+    color: var(--primary-hover);
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.btn-card:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* ---------- Formularios (Reserva, Contacto, Login) ---------- */
+.Formulario {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: min(28rem, calc(100% - 2rem));
+    margin: 0 auto 40px;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-subtle);
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-hover);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    padding: 10px;
+    border: 1px solid #5c86fa;
+    border-radius: 5px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--dark-color);
+    background-color: var(--white);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.campo textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: var(--primary-hover);
+    box-shadow: 0 0 0 3px rgba(47, 112, 225, 0.2);
+}
+
+.campo-ayuda {
+    font-size: 0.85rem;
+    color: #5d6d7e;
+}
+
+.boton {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: block;
+    margin: 10px auto 0;
+    width: 100%;
+}
+
+.boton:hover {
+    background-color: var(--primary-hover);
+}
+
+.boton:active {
+    transform: scale(0.98);
+}
+
+/* Mensajes de estado de los formularios */
+.mensaje-form {
+    display: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.mensaje-form.visible {
+    display: block;
+}
+
+.mensaje-form.ok {
+    background-color: #e8f6ee;
+    color: var(--success-color);
+    border: 1px solid #a9dfbf;
+}
+
+.mensaje-form.error {
+    background-color: #fdecea;
+    color: var(--error-color);
+    border: 1px solid #f5b7b1;
+}
+
+/* ---------- Contacto ---------- */
+.contacto-layout {
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.contacto-info {
+    background-color: var(--dark-color);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-subtle);
+}
+
+.contacto-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.contacto-dato {
+    margin-bottom: 1.25rem;
+}
+
+.contacto-dato h4 {
+    font-size: 1rem;
+    color: var(--gray);
+    margin-bottom: 0.15rem;
+}
+
+.contacto-dato p,
+.contacto-dato a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.contacto-dato a:hover {
+    text-decoration: underline;
+}
+
+.contacto-layout .Formulario {
+    width: 100%;
+    margin: 0;
+}
+
+/* ---------- Login / Registro ---------- */
+.auth-wrap {
+    max-width: 440px;
+    margin: 0 auto 4rem;
+    padding: 0 1rem;
+}
+
+.auth-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--white);
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-subtle);
+}
+
+.auth-tab {
+    padding: 0.9rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    background-color: #e9eef7;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.auth-tab[aria-selected="true"] {
+    background-color: var(--white);
+    color: var(--primary-hover);
+    box-shadow: inset 0 -3px 0 var(--primary-color);
+}
+
+.auth-wrap .Formulario {
+    width: 100%;
+    margin: 0;
+    border-radius: 0 0 12px 12px;
+}
+
+.auth-wrap .Formulario[hidden] {
+    display: none;
+}
+
+.auth-extra {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.auth-extra a {
+    color: var(--primary-hover);
+    font-weight: 600;
+}
+
+/* ---------- Pie de página ---------- */
+.main-footer {
+    background-color: var(--dark-color);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+}
+
+/* ---------- Adaptación a móvil ---------- */
+@media (max-width: 760px) {
+    .header-container {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .main-nav ul {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .hero-content h2 {
+        font-size: 2.1rem;
+    }
+
+    .menu-section {
+        padding: 0 1rem;
+    }
+
+    .contacto-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+/* ---------- Reserva: formulario a la izquierda + carrusel a la derecha ---------- */
+.reserva-layout {
+    max-width: 1100px;
+    margin: 0 auto 4rem;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.reserva-layout .Formulario {
+    width: 100%;
+    margin: 0;
+}
+
+.carrusel {
+    position: sticky;
+    top: 6rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-hover);
+    background-color: var(--dark-color);
+}
+
+.carrusel-pista {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carrusel-slide {
+    position: relative;
+    min-width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: 640px;
+}
+
+.carrusel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carrusel-texto {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 3rem 1.5rem 3.5rem;
+    color: var(--white);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+}
+
+.carrusel-texto h3 {
+    font-size: 1.4rem;
+}
+
+.carrusel-texto p {
+    font-size: 0.95rem;
+}
+
+.carrusel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.85);
+    color: var(--dark-color);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.carrusel-btn:hover {
+    background-color: var(--white);
+}
+
+.carrusel-btn.prev { left: 0.75rem; }
+.carrusel-btn.next { right: 0.75rem; }
+
+.carrusel-puntos {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.carrusel-punto {
+    width: 11px;
+    height: 11px;
+    padding: 0;
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.carrusel-punto[aria-current="true"] {
+    background-color: var(--white);
+}
+
+@media (max-width: 900px) {
+    .reserva-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .carrusel {
+        position: relative;
+        top: 0;
+    }
+
+    .carrusel-slide {
+        aspect-ratio: 16 / 10;
+    }
+}
